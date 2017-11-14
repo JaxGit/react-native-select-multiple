@@ -59,7 +59,7 @@ export default class SelectMultiple extends Component {
     const rows = this.getRowData(props)
 
     const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1.value !== r2.value || r1.selected !== r2.selected
+      rowHasChanged: (r1, r2) => r1 !== r2
     }).cloneWithRows(rows)
 
     this.state = { dataSource }
@@ -103,7 +103,7 @@ export default class SelectMultiple extends Component {
     if (Object.prototype.toString.call(obj) === '[object String]') {
       return { label: obj, value: obj }
     } else {
-      return { label: obj.label, value: obj.value }
+      return obj
     }
   }
 
