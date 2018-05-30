@@ -34,10 +34,12 @@ export default class SelectMultiple extends Component {
     style: styleType,
     rowStyle: styleType,
     checkboxStyle: styleType,
+    checkboxIcon: PropTypes.element,
     labelStyle: styleType,
 
     selectedRowStyle: styleType,
     selectedCheckboxStyle: styleType,
+    selectedCheckboxIcon: PropTypes.element,
     selectedLabelStyle: styleType
   }
 
@@ -128,12 +130,14 @@ export default class SelectMultiple extends Component {
       checkboxSource,
       rowStyle,
       labelStyle,
+      checkboxIcon,
       checkboxStyle
     } = this.props
 
     const {
       selectedCheckboxSource,
       selectedRowStyle,
+      selectedCheckboxIcon,
       selectedCheckboxStyle,
       selectedLabelStyle
     } = this.props
@@ -152,7 +156,11 @@ export default class SelectMultiple extends Component {
     return (
       <TouchableWithoutFeedback onPress={() => this.onRowPress(row)}>
         <View style={rowStyle}>
-          <Image style={checkboxStyle} source={checkboxSource} />
+          {(checkboxIcon != undefined) ? (
+            row.selected ? selectedCheckboxIcon : checkboxIcon
+          ) : (
+            <Image style={checkboxStyle} source={checkboxSource} />
+          )}
           {this.renderLabel(row.label, labelStyle, row.selected)}
         </View>
       </TouchableWithoutFeedback>
